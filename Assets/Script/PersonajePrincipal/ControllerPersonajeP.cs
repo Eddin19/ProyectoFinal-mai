@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControllerPersonajeP : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ControllerPersonajeP : MonoBehaviour
 	public float jumpSpeed = 7;
 
     private int currentAnimation = 1;
+    public float delay = 2f;
+    private float startTime;
     // Start is called before the first frame update
 
     public Transform Disparo;
@@ -22,6 +25,7 @@ public class ControllerPersonajeP : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        startTime = Time.time;
     }
 
     // Update is called once per frame
@@ -86,6 +90,7 @@ public class ControllerPersonajeP : MonoBehaviour
         if (gameManager.GetVidas() <= 0)
         {
             currentAnimation = 8;
+            SceneManager.LoadScene("GameOver");
         }
 
         animator.SetInteger("Estado", currentAnimation);
